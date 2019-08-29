@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>姓名操作</legend>
+            姓氏:
+            <input type="text" placeholder="请输入姓名" v-model="firstName"><br />
+            名字:
+            <input type="text" placeholder="请输入名字" v-model="lastName"><br />
+        </fieldset>
+        <fieldset>
+            <legend>单向和双向操作</legend>
+            姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br />
+            姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName2"><br />
+            姓名(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br />
+        </fieldset>
+       
+     
+    </div>
+
+    <script type="text/javascript">
+       const vm = new Vue({
+           el:'#app',
+           data:{
+               firstName:'东方',
+               lastName:'不败',
+               fullName2:'欧阳_海燕'
+           },
+           // 计算属性：某个属性值改变的时候,相关联的属性的值会自动的改变
+           computed:{
+               /**
+                * 方式1:直接写属性名字fullName1(){} 同于get操作
+                * 方式2:写属性名字--对象的写法: fullName3:{get(){},set(){}} get和set操作
+                * 
+                */
+               // get操作
+               fullName1(){
+                return this.firstName+'_'+this.lastName
+               },
+               fullName3:{
+                   //有get和set操作的放在对象里
+                   get(){//当读取属性值时调用get
+                       return this.firstName+'_'+this.lastName
+                   },
+                   set(val){//当修改了属性值后调用。用来监视属性值变化
+                       //split('_')拆分字符串为数组
+                       const name=val.split('_')
+                       this.firstName=name[0]
+                       this.lastName=name[1]
+                   }
+               }
+           },
+           // 监视写法1 实时变化的放在watch里
+           watch: {
+               firstName(val){
+                   this.fullName2=val+'_'+this.lastName
+               }
+           }
+       })
+
+       //监视写法2 写在vue实例对象的外边 语法 vm.$watch（）
+       //参数1 要监视的对象  参数2 回调函数
+       vm.$watch('lastName',function(val){
+        this.fullName2=this.firstName+'_'+val
+       })
+    </script>
+</body>
+
+</html>

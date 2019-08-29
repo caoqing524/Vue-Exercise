@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang='en'>
+   <head>
+      <meta charset="utf-8"/>
+      <meta name='viewport' content='width=device-width' initial-scale='1.0'/>
+      <title>每天都被自己美醒</title>
+      <script src='../js/vue.js'></script>
+   </head>
+   <body>
+     <div id='app'>
+        <fieldset>
+           <legend>数组的数据更新操作 </legend>
+             <button @click='addClick'>添加</button>
+             <!-- Input中v-model双向数据绑定 -->
+             姓名：<input type="text" v-model='userName'/>
+             年龄：<input type='text' v-model='userAge'/>
+             描述：<input type='text' v-model='userDesc' />
+             <!-- 用v-for来遍历person数组 -->
+             <ul>
+               <li v-for='(per,index) in person' :key='per.id'>
+                  索引：{{index}}
+                  姓名：{{per.name}}
+                  年龄：{{per.age}}
+                  描述:{{per.desc}}
+                  <button @click='delClick(index)'>删除</button>
+                  <button @click='updateClick(index,{id:++userId,name:userName,age:userAge,desc:userDesc})'>更新</button>
+               </li>
+             </ul>
+        </fieldset>
+     </div>
+     <script>
+       //创建一个Vue的实例对象
+       const vm=new Vue({
+        //指定模板区域
+         el:'#app',
+         data:{
+           //添加的对象的数据放到data里
+           userId:4,
+           userName:'',
+           userAge:'',
+           userDesc:'',
+           person:[
+             {id:1,name:'a',age:20,desc:'可乐'},
+             {id:2,name:'b',age:21,desc:'薯片'},
+             {id:3,name:'c',age:22,desc:'咖啡'},
+             {id:4,name:'d',age:23,desc:'沙拉'}
+           ]
+         },
+        methods: {
+          //点击删除
+          delClick(index){
+            this.person.splice(index)
+          },
+          //点击添加的操作
+          addClick(){
+            //要先有个对象
+            const obj={
+             id:++this.userId,
+             name:this.userName,
+             age:this.userAge,
+             desc:this.userDesc
+            }
+            //把该对象添加到person数组中
+            this.person.push(obj)
+          },
+          //点击更新的操作
+          updateClick(index,per){
+            this.person[index].id=per.id
+            this.person[index].name=per.name
+            this.person[index].age=per.age
+            this.person[index].desc=per.desc
+          }
+
+
+        }
+
+
+
+
+       })
+     
+     </script>
+   </body>
+</html>

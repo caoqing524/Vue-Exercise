@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> </title>
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  
+  
+    <!--插值/大括号表达式 让Vue实例对象的内容在文本内容区表现出来 -->
+     <p>{{msg}}</p>
+    <!-- 绑定事件监听 -->
+    <button v-on:click='change'>000</button>
+    <!-- 绑定事件监听的简单写法 -->
+    <button @click='change'>66</button>
+    <!-- 强制数据绑定 -->
+    <a v-bind:href='url'>lalala</a>
+    <!-- 强制数据绑定的简单写法 -->
+  <a :href='url'>222</a>
+  
+</div>
+  <script type="text/javascript">
+   //创建Vue实例对象
+   const vm=new Vue({
+     el:'#app',
+     data:{
+       msg:'莫愁前路无知己',
+       url:'http://www.jingdong.com'
+     },
+     methods: {
+       change(){
+         alert('11')
+       }
+     },
+   })
+   
+   
+   
+   
+   
+   
+   
+   
+    // const vm = new Vue({
+    //   el: '#app',
+    //   data: {
+    //     msg: '天气不错study',
+    //     url: 'http://www.baidu.com'
+    //   },
+    //   methods: {
+    //     test() {
+    //       //alert(event.target)
+    //       alert('aaa')
+    //     }
+    //   }
+    // })
+  </script>
+</body>
+
+</html>

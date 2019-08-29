@@ -1,0 +1,82 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 20:13:49
+ * @LastEditTime: 2019-08-20 20:37:43
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <p>{{msg}}</p>
+    </div>
+    <script type="text/javascript">
+        /**
+         * v-model-----指令
+         * 总结: 在Vue开发中，如果在html标签的内部,有v-开头的属性,此时这些写法的属性,都叫指令
+         * v-model指令:绑定数据的指令
+         * v-model="表达式" 表达式----->在实例化Vue的时候,data对象中内部的属性的名字(计算属性的属性也可以在v-model指令中书写)
+         *
+         */
+        
+        //实例化Vue对象
+
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'真神奇'
+            }
+        })
+
+
+
+
+
+        /**
+         * 
+         * 
+         * html中要有容器(容器有id----目的:vue的实例对象要获取容器,操作容器中的模版内容)
+         * js中的代码:实例化Vue,需要在Vue中进行配置
+         * 
+         * 
+         * 
+         * 
+         * 
+         */
+      
+
+        // <div id="app">  容器
+        //  模版
+        //     <input type="text" v-model="msg">   v-model=====>指令
+        //     <p>{{msg}}</p>   // {{表达式}} ------->插值语法
+        // </div> 
+
+
+        // 实例化Vue
+        // const vm = new Vue({
+        //     el:'#app', // 选择器----负责找容器
+        //     data:{ // 数据
+        //         msg:'真神奇'  // 属性和值
+        //     }
+        // })
+
+
+        //  MVVM   M---->数据, V-----视图,   VM----Vue的实例对象
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 20:13:49
+ * @LastEditTime: 2019-08-20 21:03:03
+ * @LastEditors: Please set LastEditors
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        //需求:当某个对象的属性值发生变化后,和该属性相关联的属性的值也会自动变化
+        //例子:如果person对象中的firstName或者lastName属性值改变,那么相关联的fullName属性值会自动改变
+        //为当前的某个对象,添加某个属性,对该属性的一个配置
+        // Object.defineProperty(对象,'属性名字',配置对象)
+
+        const person = {
+            firstName: '东方',
+            lastName: '不败'
+        }
+        // 通过Object.defineProperty('对象','添加的属性',配置对象)
+        Object.defineProperty(person, 'fullName', {
+            configurable: false, // 该属性是否可以被重新定义,默认为false
+            enumerable: true, // 该属性是否可以被枚举,默认是false
+            // value:'哈_哈', // 该属性的默认值
+            // writable:false, // 该属性值是否可以被修改
+            // 读--获取的操作---外部使用person.fullName的时候
+            get() {
+                return this.firstName + '_' + this.lastName
+            },
+            // 写--设置的操作---外部使用person.fullName赋值的时候
+            set(val) {
+                const name = val.split('_')
+                this.firstName = name[0],
+                this.lastName = name[1]
+            }
+        })
+        person.fullName = person.firstName + '_' + person.lastName
+        console.log(person.fullName)
+        person.firstName = '诸葛'
+        person.lastName = '孔明'
+        // 无法改变
+        console.log(person.fullName)
+        // 修改fullName属性值
+        person.fullName = '欧阳_飞哥'
+        console.log(person.firstName)
+        console.log(person.lastName)
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>每天都被自己帅醒!</title>
+  <link rel="stylesheet" href="">
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <fieldset>
+      <legend>数组数据的更新操作</legend>
+      <button @click='addClick'>添加</button><br>
+      <!-- v-model实现双向数据绑定 
+         Input输入框的内容一旦变化，会被ViewModel监听（DOMListener）到告诉Vue实例对象中的data，从而更新data里的数据信息
+         而Vue实例对象中的data里的信息一旦发生变化，会被ViewModel的数据绑定功能(DataBinding)告诉Input，从而更新Input内容，更新view视图页面
+      -->
+      姓名：<input type='text' v-model='userName'/><br>
+      年龄：<input type='text' v-model='userAge' /><br>
+      描述：<input type='text' v-model='userDesc' /><br>
+      <ol>
+        <!-- 遍历数组 -->
+        <li v-for='(per,index) in person' :key='per.id'>
+          索引:{{index}}
+          id:{{per.id}}
+          姓名：{{per.name}}
+          年龄：{{per.age}}
+          描述：{{per.desc}}
+          <button @click='delClick(index)'>删除</button>
+          <button @click='updateClick(index,{id:++userId,name:userName,age:userAge,desc:userDesc})'>更新</button>
+        </li>
+      </ol>
+      <hr>
+
+    </fieldset>
+    
+    <hr>
+    
+  </div>
+  <script type="text/javascript">
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        userName:'',
+        userAge:0,
+        userDesc:'',
+        userId:4,
+
+        person: [{
+            id: 1,
+            name: '小明',
+            age: 15,
+            desc: '吃饭'
+          },
+          {
+            id: 2,
+            name: '小红',
+            age: 16,
+            desc: '睡觉'
+          },
+          {
+            id: 3,
+            name: '小李',
+            age: 17,
+            desc: '打代码'
+          },
+          {
+            id: 4,
+            name: '小张',
+            age: 18,
+            desc: '打豆豆'
+          }
+
+        ],
+
+        obj: {
+          name: '可鑫',
+          age: 66,
+          desc: '一个爱睡觉的男的'
+        }
+      },
+
+      methods: {
+        //Vue中所控制的所有回调函数中的this都是vm或者组件对象
+        
+        //点击删除
+        delClick(index){
+          this.person.splice(index,1)
+        },
+        //点击添加
+        addClick(){
+        //有个对象
+       const obj={
+         id: ++this.userId,
+         name: this.userName,
+         age: this.userAge,
+         desc: this.userDesc
+       }
+        //把对象添加到person数组里
+        this.person.push(obj)
+        },
+        //点击更新操作
+        //per对应的实参为{id:++userId,name:userName,age:userAge,desc:userDesc}
+      updateClick(index,per){
+        //this.person[index]是个对象，取该对象里的id
+        this.person[index].id=per.id
+         this.person[index].name=per.name
+         this.person[index].age=per.age
+          this.person[index].desc=per.desc
+
+      }
+
+
+      },
+    })
+  </script>
+</body>
+
+</html>
